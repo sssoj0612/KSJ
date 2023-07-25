@@ -29,7 +29,7 @@
 	<link rel="stylesheet" href="/css/aos.css">
 	<link rel="stylesheet" href="/css/style.css">
 
-	<title>Tour Free Bootstrap Template for Travel Agency by Untree.co</title>
+	<title>반려동물 장례 서비스</title>
 </head>
 
 <body>
@@ -47,7 +47,7 @@
 	<nav class="site-nav">
 		<div class="container">
 			<div class="site-navigation">
-				<a href="/index" class="logo m-0">Tour <span class="text-primary">.</span></a>
+				<a href="/index" class="logo m-0">KSJ <span class="text-primary">.</span></a>
 
 				<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
 					<li class="active"><a href="/index">Home</a></li>
@@ -86,28 +86,23 @@
 			<div class="row align-items-center">
 				<div class="col-lg-7">
 					<div class="intro-wrap">
-						<h1 class="mb-5"><span class="d-block">Let's Enjoy Your</span> Trip In <span class="typed-words"></span></h1>
+						<h1 class="mb-5"><span class="d-block">아이의 마지막을</span><span class="typed-words"></span></h1>
 
 						<div class="row">
 							<div class="col-12">
 								<form class="form">
 									<div class="row mb-2">
 										<div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
-											<select name="" id="" class="form-control custom-select">
-												<option value="">Destination</option>
-												<option value="">부산</option>
-												<option value="">대구</option>
-												<option value="">인천</option>
-												<option value="">광주</option>
-												<option value="">울산</option>
-												<option value="">세종</option>
-												<option value="">경기</option>
-												<option value="">강원</option>
-												<option value="">충북</option>
-												<option value="">충남</option>
-												<option value="">전북</option>
-												<option value="">경북</option>
-												<option value="">경남</option>
+											<select name="destination" id="destination" class="form-control custom-select">
+												<option value="">지역 선택</option>
+												<option value="gimpo">김포</option>
+												<option value="incheon">인천</option>
+												<option value="gyeonggi">경기</option>
+												<option value="chungcheong">충북/충남</option>
+												<option value="jeolla">전북/전남</option>
+												<option value="gyeongsang">경북/경남</option>
+												<option value="daegu">대구</option>
+												<option value="puul">부산/울산</option>
 											</select>
 										</div>
 										<div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-5">
@@ -120,12 +115,12 @@
 									</div>    
 									<div class="row align-items-center">
 										<div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
-											<input type="submit" class="btn btn-primary btn-block" value="Search">
+											<input type="submit" class="btn btn-primary btn-block" value="검색" id="searchButton" onclick="searchLocation()">
 										</div>
 										<div class="col-lg-8">
 											<label class="control control--checkbox mt-3">
-												<span class="caption">Save this search</span>
-												<input type="checkbox" checked="checked" />
+												<span class="caption">현재 내 위치로 검색</span>
+												<input type="checkbox" id="mylocation"/>
 												<div class="control__indicator"></div>
 											</label>
 										</div>
@@ -147,6 +142,10 @@
 			</div>
 		</div>
 	</div>
+
+
+
+	<div id="result"></div> <!--현재 내위치 표시-->
 
 
 	<div class="untree_co-section">
@@ -612,7 +611,7 @@
 			})
 
 			var typed = new Typed('.typed-words', {
-				strings: ["San Francisco."," Paris."," New Zealand.", " Maui.", " London."],
+				strings: [" 배웅해 주세요."," 편안히 보내주세요."," 인사해 주세요."],
 				typeSpeed: 80,
 				backSpeed: 80,
 				backDelay: 4000,
@@ -627,7 +626,70 @@
 				}
 
 			});
+
+			$("#searchButton").click(function (event) { // search 버튼 클릭 함수
+				event.preventDefault();
+				var selectedDestination = $("#destination").val();
+				if (selectedDestination === "chungcheong") {
+					window.location.href = "/map/chungcheong";
+				}
+				else if (selectedDestination === "daegu") {
+					window.location.href = "/map/daegu";
+				}
+				else if (selectedDestination === "gimpo") {
+					window.location.href = "/map/gimpo";
+				}
+				else if (selectedDestination === "gyeonggi") {
+					window.location.href = "/map/gyeonggi";
+				}
+				else if (selectedDestination === "gyeongsang") {
+					window.location.href = "/map/gyeongsang";
+				}
+				else if (selectedDestination === "incheon") {
+					window.location.href = "/map/incheon";
+				}
+				else if (selectedDestination === "jeolla") {
+					window.location.href = "/map/jeolla";
+				}
+				else if (selectedDestination === "puul") {
+					window.location.href = "/map/puul";
+				}
+			});
 		})
+
+
+
+
+		function searchLocation() { // 검색 버튼 누르면
+			if (document.getElementById('mylocation').checked) { // 체크박스 체크하고
+				if (navigator.geolocation) { // GPS를 지원하면
+					navigator.geolocation.getCurrentPosition(function(position) {
+						alert(position.coords.latitude + ' ' + position.coords.longitude); // 위도 경도 알람창으로 뜸
+					}, function(error) {
+						console.error(error);
+					}, {
+						enableHighAccuracy: false,
+						maximumAge: 0,
+						timeout: Infinity
+					});
+
+				} else {
+					alert('GPS를 지원하지 않습니다');
+				}
+			}
+			getLocation();
+
+		}
+
+
+
+
+
+
+
+
+
+
 	</script>
 
 	<script src="/js/custom.js"></script>
