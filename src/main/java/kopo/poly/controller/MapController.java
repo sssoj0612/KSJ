@@ -55,4 +55,10 @@ public class MapController {
         return "/map/puul";
     }
 
+    @GetMapping("/map/my")
+    public String my() throws Exception {
+        log.info(this.getClass().getName() + ".my 페이지 보여주는 함수 실행");
+        return "/map/my";
+    }
+
 }
