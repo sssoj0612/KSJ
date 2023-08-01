@@ -69,7 +69,15 @@
 				</li>
 				<li><a href="/about">About</a></li>
 				<li><a href="/contact">Contact Us</a></li>
-				<li><a href="/user/login_resist_form">Login/Join</a></li>
+				<li th:if="${session.SS_USER_ID == null}"> <!-- 로그인 X일 때 -->
+					<a href="/user/login_resist_form">Login/Join</a>
+				</li>
+				<li th:if="${session.SS_USER_ID != null}">
+					<a href="/index">Logout</a> <!-- 로그아웃 기능 만들어야함!! -->
+				</li>
+				<li th:if="${session.SS_USER_ID != null}"> <!-- 로그인 O일 때-->
+					<strong> 환영합니다, [[${session.SS_USER_ID}]]님.</strong>
+				</li>
 			</ul>
 
 			<a href="#" class="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-none light" data-toggle="collapse" data-target="#main-navbar">

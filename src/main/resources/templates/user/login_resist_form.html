@@ -131,7 +131,7 @@
         // HTML로딩이 완료되고, 실행됨
         $(document).ready(function () {
 
-            let register = document.getElementById("register"); // form 태그
+            let register = document.getElementById("register"); // 회원가입 form 태그
 
             // 아이디 중복체크
             $("#btnUserId").on("click", function () { // 버튼 클릭했을때, 발생되는 이벤트 생성함(onclick 이벤트와 동일함)
@@ -154,7 +154,7 @@
 
 
         function checkInputData() {
-            let login = document.getElementById("login"); // form 태그
+            let login = document.getElementById("login"); // 로그인 form 태그
 
             if (login.user_id.value === "") {
                 alert("아이디를 입력하세요.");
@@ -286,9 +286,9 @@
             <button type="button" class="togglebtn" onclick="login()">LOG IN</button>
             <button type="button" class="togglebtn" onclick="register()">REGISTER</button>
         </div>
-        <div class="social-icons">
-            <!-- 소셜 아이콘 이미지 -->
-        </div>
+        <!--<div class="social-icons">
+            &lt;!&ndash; 소셜 아이콘 이미지 &ndash;&gt;
+        </div>-->
 
         <form action="/user/loginProc" method="post" onsubmit="checkInputData()" id="login" class="input-group">
             <input type="text" name="user_id" id="login_user_id" class="input-field" placeholder="User ID" required>
