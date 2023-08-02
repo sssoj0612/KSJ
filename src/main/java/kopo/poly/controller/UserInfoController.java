@@ -25,7 +25,7 @@ public class UserInfoController {
     private final IUserInfoService userInfoService;
 
 
-    /* 로그인 화면으로 이동 */
+    /* 로그인,회원가입 화면으로 이동 */
     @GetMapping(value = "/user/login_resist_form")
     public String login_resist_form() {
         log.info(this.getClass().getName() + ".login 페이지 보여주는 함수 실행");
@@ -34,7 +34,7 @@ public class UserInfoController {
 
 
 
-    //회원가입 로직 처리
+    /* 회원가입 로직 처리 */
     @PostMapping(value = "/user/insertUserInfo")
     public String insertUserInfo(HttpServletRequest request, ModelMap modelMap) throws Exception {
 
@@ -218,5 +218,24 @@ public class UserInfoController {
     }
 
 
+
+
+    /* 로그아웃 로직 */
+    @PostMapping(value = "/user/logout")
+    public String logout(HttpSession session) {
+        log.info(this.getClass().getName() + ".logout Start!");
+
+        try {
+            // 세션에 저장된 사용자 정보를 제거하여 로그아웃 처리
+            session.invalidate();
+
+        } catch (Exception e) {
+            log.info(e.toString());
+            e.printStackTrace();
+        } finally {
+            log.info(this.getClass().getName() + ".logout End!");
+        }
+        return "/index"; // 로그아웃 후 리다이렉트할 페이지
+    }
 
 }

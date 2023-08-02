@@ -54,7 +54,7 @@
 				<li class="has-children">
 					<a href="#">Dropdown</a>
 					<ul class="dropdown">
-						<li><a href="/elements">Elements</a></li>
+						<li><a href="/services">Services</a></li>
 						<li><a href="#">Menu One</a></li>
 						<li class="has-children">
 							<a href="#">Menu Two</a>
@@ -73,7 +73,7 @@
 					<a href="/user/login_resist_form">Login/Join</a>
 				</li>
 				<li th:if="${session.SS_USER_ID != null}">
-					<a href="/index">Logout</a> <!-- 로그아웃 기능 만들어야함!! -->
+					<a href="javascript:void(0);" onclick="logout()">Logout</a>
 				</li>
 				<li th:if="${session.SS_USER_ID != null}"> <!-- 로그인 O일 때-->
 					<strong> 환영합니다, [[${session.SS_USER_ID}]]님.</strong>
@@ -106,9 +106,9 @@
 											<option value="gimpo">김포</option>
 											<option value="incheon">인천</option>
 											<option value="gyeonggi">경기</option>
-											<option value="chungcheong">충북/충남</option>
-											<option value="jeolla">전북/전남</option>
-											<option value="gyeongsang">경북/경남</option>
+											<option value="chungcheong">충청도</option>
+											<option value="jeolla">전라도</option>
+											<option value="gyeongsang">경상도</option>
 											<option value="daegu">대구</option>
 											<option value="puul">부산/울산</option>
 										</select>
@@ -140,20 +140,16 @@
 			</div>
 			<div class="col-lg-5">
 				<div class="slides">
-					<img src="/images/hero-slider-1.jpg" alt="Image" class="img-fluid active">
-					<img src="/images/hero-slider-2.jpg" alt="Image" class="img-fluid">
-					<img src="/images/hero-slider-3.jpg" alt="Image" class="img-fluid">
-					<img src="/images/hero-slider-4.jpg" alt="Image" class="img-fluid">
-					<img src="/images/hero-slider-5.jpg" alt="Image" class="img-fluid">
+					<img src="/images/rb01.jpg" alt="Image" class="img-fluid active">
+					<img src="/images/rb02.jpg" alt="Image" class="img-fluid">
+					<img src="/images/rb03.jpg" alt="Image" class="img-fluid">
+					<img src="/images/rb04.jpg" alt="Image" class="img-fluid">
+					<img src="/images/rb05.jpg" alt="Image" class="img-fluid">
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
-
-
-<div id="result"></div> <!--현재 내위치 표시-->
 
 
 <div class="untree_co-section">
@@ -678,6 +674,24 @@
 </script>
 
 <script src="/js/custom.js"></script>
+
+
+<script th:inline="javascript">
+	function logout() {
+		// 로그아웃 요청을 보내는 코드
+		fetch('/user/logout', {
+			method: 'POST'
+		}).then(function(response) {
+			// 로그아웃이 성공하면 페이지를 리로드하여 로그아웃 상태를 반영합니다.
+			if (response.ok) {
+				location.reload();
+			}
+		}).catch(function(error) {
+			console.error('Error during logout:', error);
+		});
+	}
+</script>
+
 
 </body>
 

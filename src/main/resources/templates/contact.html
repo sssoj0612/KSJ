@@ -69,7 +69,15 @@
           </li>
           <li><a href="/about">About</a></li>
           <li class="active"><a href="/contact">Contact Us</a></li>
-          <li><a href="/user/login_resist_form">Login/Join</a></li>
+          <li th:if="${session.SS_USER_ID == null}"> <!-- 로그인 X일 때 -->
+            <a href="/user/login_resist_form">Login/Join</a>
+          </li>
+          <li th:if="${session.SS_USER_ID != null}">
+            <a href="javascript:void(0);" onclick="logout()">Logout</a>
+          </li>
+          <li th:if="${session.SS_USER_ID != null}"> <!-- 로그인 O일 때-->
+            <strong> 환영합니다, [[${session.SS_USER_ID}]]님.</strong>
+          </li>
         </ul>
 
         <a href="#" class="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-none light" data-toggle="collapse" data-target="#main-navbar">
@@ -293,6 +301,21 @@
   
   <script src="/js/custom.js"></script>
 
+  <script th:inline="javascript">
+    function logout() {
+      // 로그아웃 요청을 보내는 코드
+      fetch('/user/logout', {
+        method: 'POST'
+      }).then(function(response) {
+        // 로그아웃이 성공하면 페이지를 리로드하여 로그아웃 상태를 반영합니다.
+        if (response.ok) {
+          location.reload();
+        }
+      }).catch(function(error) {
+        console.error('Error during logout:', error);
+      });
+    }
+  </script>
 </body>
 
 </html>
