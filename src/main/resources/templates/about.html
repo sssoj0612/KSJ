@@ -50,12 +50,12 @@
         <a href="/index" class="logo m-0">KSJ <span class="text-primary">.</span></a>
 
         <ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
-          <li><a href="/index">Home</a></li>
+          <li class="active"><a href="/index">Home</a></li>
           <li class="has-children">
             <a href="#">Dropdown</a>
             <ul class="dropdown">
-              <li><a href="/elements">Elements</a></li>
-              <li><a href="#">Menu One</a></li>
+              <li><a href="/services">Services</a></li>
+              <li><a href="/about">About</a></li>
               <li class="has-children">
                 <a href="#">Menu Two</a>
                 <ul class="dropdown">
@@ -67,8 +67,8 @@
               <li><a href="#">Menu Three</a></li>
             </ul>
           </li>
-          <li class="active"><a href="/about">About</a></li>
           <li><a href="/contact">Contact Us</a></li>
+          <li><a href="/notice">Notice</a></li>
           <li th:if="${session.SS_USER_ID == null}"> <!-- 로그인 X일 때 -->
             <a href="/user/login_resist_form">Login/Join</a>
           </li>
