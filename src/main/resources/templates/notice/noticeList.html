@@ -1,10 +1,309 @@
-<!DOCTYPE html>
+<!-- /*
+* Template Name: Tour
+* Template Author: Untree.co
+* Tempalte URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Untree.co">
+    <link rel="shortcut icon" href="/images/favicon.png">
+
+    <meta name="description" content=""/>
+    <meta name="keywords" content="bootstrap, bootstrap4"/>
+
+    <link rel="stylesheet" href="/css/table.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Source+Serif+Pro:wght@400;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="/fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" href="/css/daterangepicker.css">
+    <link rel="stylesheet" href="/css/aos.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script type="text/javascript" src="/js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+
+        // HTML로딩이 완료되고, 실행됨
+        $(document).ready(function () {
+
+            // 버튼 클릭했을때, 발생되는 이벤트 생성함(onclick 이벤트와 동일함)
+            $("#btnReg").on("click", function () {
+                location.href = "/notice/noticeReg"; // 글 작성하는 창으로 이동
+            })
+        })
+
+        //상세보기 이동
+        function doDetail(seq) {
+            location.href = "/notice/noticeInfo?nSeq=" + seq;
+        }
+
+    </script>
+
+
+    <title>반려동물 장례 서비스</title>
 </head>
+
 <body>
 
+
+<div class="site-mobile-menu site-navbar-target">
+    <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close">
+            <span class="icofont-close js-menu-toggle"></span>
+        </div>
+    </div>
+    <div class="site-mobile-menu-body"></div>
+</div>
+
+<nav class="site-nav">
+    <div class="container">
+        <div class="site-navigation">
+            <a href="/index" class="logo m-0">KSJ <span class="text-primary">.</span></a>
+
+            <ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
+                <li class="active"><a href="/index">Home</a></li>
+                <li class="has-children">
+                    <a href="#">Dropdown</a>
+                    <ul class="dropdown">
+                        <li><a href="/services">Services</a></li>
+                        <li><a href="/about">About</a></li>
+                        <li class="has-children">
+                            <a href="#">Menu Two</a>
+                            <ul class="dropdown">
+                                <li><a href="#">Sub Menu One</a></li>
+                                <li><a href="#">Sub Menu Two</a></li>
+                                <li><a href="#">Sub Menu Three</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Menu Three</a></li>
+                    </ul>
+                </li>
+                <li><a href="/contact">Contact Us</a></li>
+                <li><a href="/notice/noticeReg">Notice</a></li>
+                <li th:if="${session.SS_USER_ID == null}"> <!-- 로그인 X일 때 -->
+                    <a href="/user/login_resist_form">Login/Join</a>
+                </li>
+                <li th:if="${session.SS_USER_ID != null}">
+                    <a href="javascript:void(0);" onclick="logout()">Logout</a>
+                </li>
+                <li th:if="${session.SS_USER_ID != null}"> <!-- 로그인 O일 때-->
+                    <strong> 환영합니다, [[${session.SS_USER_ID}]]님.</strong>
+                </li>
+            </ul>
+
+            <a href="#"
+               class="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-none light"
+               data-toggle="collapse" data-target="#main-navbar">
+                <span></span>
+            </a>
+
+        </div>
+    </div>
+</nav>
+
+
+<div class="hero hero-inner">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mx-auto text-center">
+                <div class="intro-wrap">
+                    <h1 class="mb-0">Notice</h1>
+                    <p class="text-white">Far far away, behind the word mountains, far from the countries Vokalia and
+                        Consonantia, there live the blind texts. </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="untree_co-section">
+    <div class="container my-5">
+        <div class="mb-5">
+
+            <fieldset>
+                <legend>게시글 목록</legend>
+            <hr/>
+            <button id="btnReg" type="button" class="btn btn-primary">작성하기</button><br><br>
+            <div class="divTable minimalistBlack" style="text-align: center">
+                <div class="divTableHeading">
+                    <div class="divTableRow" style="text-align: center">
+                        <div class="divTableHead" style="text-align: center">#</div>
+                        <div class="divTableHead" style="width: 35%; text-align: center">글제목</div>
+                        <div class="divTableHead" style="text-align: center">조회수</div>
+                        <div class="divTableHead" style="text-align: center">등록자</div>
+                        <div class="divTableHead" style="text-align: center">등록일</div>
+                    </div>
+                </div>
+                <div class="divTableBody">
+
+                    <div class="divTableRow" th:each="dto:${rList}">
+                        <!--공지글이라면, '공지' 표시 +)글자 강조 효과 추가 -->
+                        <div class="divTableCell" th:if="${dto.notice_yn=='Y'}"><strong>공지</strong></div>
+                        <!--공지글이 아니라면, 글번호 보여주기-->
+                        <div class="divTableCell" th:unless="${dto.notice_yn=='Y'}">[[${dto.notice_seq}]]</div>
+                        <div class="divTableCell"
+                             th:attr="onclick='doDetail(\'' + ${dto.notice_seq} + '\')'"
+                             onmouseover="this.style.fontWeight='bold'; this.style.textDecoration='underline'"
+                             onmouseout="this.style.fontWeight='normal'; this.style.textDecoration='none'">[[${dto.title}]]
+                        </div>
+                        <div class="divTableCell">[[${dto.read_cnt}]]
+                        </div>
+                        <div class="divTableCell">[[${dto.user_id}]]
+                        </div>
+                        <div class="divTableCell">[[${dto.reg_dt}]]
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <br>
+            </div>
+            </fieldset>
+        </div>
+    </div>
+    </div>
+
+
+
+<div class="py-5 cta-section">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h2 class="mb-2 text-white">Lets you Explore the Best. Contact Us Now</h2>
+                <p class="mb-4 lead text-white text-white-opacity">Lorem ipsum dolor sit amet, consectetur adipisicing
+                    elit. Excepturi, fugit?</p>
+                <p class="mb-0"><a href="booking.html" class="btn btn-outline-white text-white btn-md font-weight-bold">Get
+                    in touch</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="site-footer">
+    <div class="inner first">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <div class="widget">
+                        <h3 class="heading">About Tour</h3>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
+                            there live the blind texts.</p>
+                    </div>
+                    <div class="widget">
+                        <ul class="list-unstyled social">
+                            <li><a href="#"><span class="icon-twitter"></span></a></li>
+                            <li><a href="#"><span class="icon-instagram"></span></a></li>
+                            <li><a href="#"><span class="icon-facebook"></span></a></li>
+                            <li><a href="#"><span class="icon-linkedin"></span></a></li>
+                            <li><a href="#"><span class="icon-dribbble"></span></a></li>
+                            <li><a href="#"><span class="icon-pinterest"></span></a></li>
+                            <li><a href="#"><span class="icon-apple"></span></a></li>
+                            <li><a href="#"><span class="icon-google"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-2 pl-lg-5">
+                    <div class="widget">
+                        <h3 class="heading">Pages</h3>
+                        <ul class="links list-unstyled">
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-2">
+                    <div class="widget">
+                        <h3 class="heading">Resources</h3>
+                        <ul class="links list-unstyled">
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="widget">
+                        <h3 class="heading">Contact</h3>
+                        <ul class="list-unstyled quick-info links">
+                            <li class="email"><a href="#">mail@example.com</a></li>
+                            <li class="phone"><a href="#">+1 222 212 3819</a></li>
+                            <li class="address"><a href="#">43 Raymouth Rd. Baltemoer, London 3910</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="inner dark">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-8 mb-3 mb-md-0 mx-auto">
+                    <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                        . All Rights Reserved. &mdash; Designed with love by <a href="https://untree.co"
+                                                                                class="link-highlight">Untree.co</a>
+                        <!-- License information: https://untree.co/license/ --> Distributed By <a
+                                href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="overlayer"></div>
+<div class="loader">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/jquery.animateNumber.min.js"></script>
+<script src="/js/jquery.waypoints.min.js"></script>
+<script src="/js/jquery.fancybox.min.js"></script>
+<script src="/js/aos.js"></script>
+<script src="/js/moment.min.js"></script>
+<script src="/js/daterangepicker.js"></script>
+
+<script src="/js/typed.js"></script>
+
+<script src="/js/custom.js"></script>
+
+<script th:inline="javascript">
+    function logout() {
+        // 로그아웃 요청을 보내는 코드
+        fetch('/user/logout', {
+            method: 'POST'
+        }).then(function (response) {
+            // 로그아웃이 성공하면 페이지를 리로드하여 로그아웃 상태를 반영합니다.
+            if (response.ok) {
+                location.reload();
+            }
+        }).catch(function (error) {
+            console.error('Error during logout:', error);
+        });
+    }
+</script>
 </body>
+
 </html>

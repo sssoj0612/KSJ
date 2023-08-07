@@ -32,6 +32,71 @@
     <link rel="stylesheet" href="/css/aos.css">
     <link rel="stylesheet" href="/css/style.css">
 
+    <script type="text/javascript" src="/js/jquery-3.6.0.min.js"></script>
+    <script th:inline="javascript">
+
+        $(document).ready(function () {
+            // 버튼 클릭했을때, 발생되는 이벤트 생성함(onclick 이벤트와 동일함)
+            $("#btnList").on("click", function () {
+                location.href = "/notice/noticeList"; // 공지사항 리스트 이동
+            })
+        })
+
+        //글자 길이 바이트 단위로 체크하기(바이트값 전달)
+        function calBytes(str) {
+            let tcount = 0;
+            let tmpStr = String(str);
+            let strCnt = tmpStr.length;
+            let onechar;
+            for (let i = 0; i < strCnt; i++) {
+                onechar = tmpStr.charAt(i);
+                if (escape(onechar).length > 4) {
+                    tcount += 2;
+                } else {
+                    tcount += 1;
+                }
+            }
+            return tcount;
+        }
+
+        // 공지사항 저장하기
+        function doSubmit() {
+
+            let f = document.getElementById("f"); // form 태그
+
+            if (f.title.value === "") {
+                alert("제목을 입력하시기 바랍니다.");
+                f.title.focus();
+                return;
+            }
+            if (calBytes(f.title.value) > 200) {
+                alert("최대 200Bytes까지 입력 가능합니다.");
+                f.title.focus();
+                return;
+            }
+
+            for (let i = 0; i < f.notice_yn.length; i++) {
+                if (f.notice_yn[i].checked) {
+                    noticeCheck = true;
+                    break;
+                }
+            }
+
+            if (f.contents.value === "") {
+                alert("내용을 입력하시기 바랍니다.");
+                f.contents.focus();
+                return;
+            }
+            if (calBytes(f.contents.value) > 4000) {
+                alert("최대 4000Bytes까지 입력 가능합니다.");
+                f.contents.focus();
+                return;
+            }
+
+        }
+    </script>
+
+
     <title>반려동물 장례 서비스</title>
 </head>
 
@@ -71,7 +136,7 @@
                     </ul>
                 </li>
                 <li><a href="/contact">Contact Us</a></li>
-                <li><a href="/notice">Notice</a></li>
+                <li><a href="/notice/noticeReg">Notice</a></li>
                 <li th:if="${session.SS_USER_ID == null}"> <!-- 로그인 X일 때 -->
                     <a href="/user/login_resist_form">Login/Join</a>
                 </li>
@@ -112,30 +177,39 @@
 <div class="untree_co-section">
     <div class="container my-5">
         <div class="mb-5">
-            <form>
+            <form action="/notice/noticeInsert" method="post" onsubmit="doSubmit()" name="f" id="f">
                 <fieldset>
                     <legend>게시글 등록</legend>
 
-                    <fieldset class="form-group">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                공지일시 체크
-                            </label>
-                        </div>
-                    </fieldset>
+                    <div class="form-group">
+                        <label for="title" class="form-label mt-4">제목</label>
+                        <fieldset class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="notice_yn" value="Y">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    공지
+                                </label>
+                            </div>
+                        </fieldset>
+                        <input type="text" class="form-control" id="title" name="title" maxlength="100"/>
+                    </div>
+
 
                     <div class="form-group">
                         <label for="exampleTextarea" class="form-label mt-4">내용</label>
-                        <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+                        <textarea class="form-control" id="exampleTextarea" name="contents" rows="3"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="formFile" class="form-label mt-4">첨부파일</label>
                         <input class="form-control" type="file" id="formFile">
                     </div>
 
-                    <button type="submit" class="btn btn-primary">완료</button>
-                    <button type="reset" class="btn btn-primary">다시쓰기</button>
+                    <br><br>
+
+                    <button type="submit" class="btn btn-primary" id="btnSend">완료</button>
+                    <button type="reset" class="btn btn-primary">다시작성</button>
+                    <button type="button" class="btn btn-primary" id="btnList">목록</button>
+
                 </fieldset>
             </form>
         </div>
