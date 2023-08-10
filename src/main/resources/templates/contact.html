@@ -323,7 +323,7 @@
     }
   </style>
 
-  <title>Tour Free Bootstrap Template for Travel Agency by Untree.co</title>
+  <title>KSJ | 반려동물 장례 서비스</title>
 </head>
 
 <body>
@@ -407,31 +407,23 @@
       <div class="row">
         <div class="col-lg-6 mb-5 mb-lg-0">
           <form class="contact-form" data-aos="fade-up" data-aos-delay="200">
-            <div class="row">
-              <div class="col-6">
-                <div class="form-group">
-                  <label class="text-black" for="fname">First name</label>
-                  <input type="text" class="form-control" id="fname">
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="form-group">
-                  <label class="text-black" for="lname">Last name</label>
-                  <input type="text" class="form-control" id="lname">
-                </div>
-              </div>
-            </div>
+
             <div class="form-group">
-              <label class="text-black" for="email">Email address</label>
-              <input type="email" class="form-control" id="email">
+              <label class="text-black" for="c_email">이메일 주소</label>
+              <input type="email" class="form-control" id="c_email">
             </div>
 
             <div class="form-group">
-              <label class="text-black" for="message">Message</label>
+              <label class="text-black" for="c_title">제목</label>
+              <input type="email" class="form-control" id="c_title">
+            </div>
+
+            <div class="form-group">
+              <label class="text-black" for="message">문의 내용</label>
               <textarea name="" class="form-control" id="message" cols="30" rows="5"></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary">Send Message</button>
+            <button type="submit" class="btn btn-primary">전송</button>
           </form>
         </div>
         <div class="col-lg-5 ml-auto">
@@ -601,11 +593,11 @@
 
   <script th:inline="javascript">
     function logout() {
-      // 로그아웃 요청을 보내는 코드
+      // 로그아웃 요청 보내는 코드
       fetch('/user/logout', {
         method: 'POST'
       }).then(function(response) {
-        // 로그아웃이 성공하면 페이지를 리로드하여 로그아웃 상태를 반영합니다.
+        // 로그아웃 성공하면 페이지 리로드하여 로그아웃 상태 반영
         if (response.ok) {
           location.reload();
         }
