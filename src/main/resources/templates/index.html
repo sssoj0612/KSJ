@@ -373,7 +373,7 @@
                 <li>
                     <!-- 로그인 O일 때-->
                     <div class="alert alert-dismissible alert-secondary" th:if="${session.SS_USER_ID != null}">
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        <button type="button" id="close" class="btn-close" data-bs-dismiss="alert"></button>
                         <strong>환영합니다,</strong> <a href="#" class="alert-link">[[${session.SS_USER_ID}]]</a>님.
                     </div>
                 </li>
@@ -978,7 +978,6 @@
 
 <script src="/js/custom.js"></script>
 
-
 <script th:inline="javascript">
     function logout() {
         // 로그아웃 요청 보내는 코드
@@ -995,7 +994,16 @@
     }
 </script>
 
+<script>
+        // 환영창 닫기
+        document.addEventListener("DOMContentLoaded", function (){
+            var closeButton = document.querySelector(".btn-close");
+            closeButton.addEventListener("click", function (){
+                var alertElement = closeButton.closest(".alert");
+                alertElement.style.display = "none";
+            });
+        });
+</script>
 
 </body>
-
 </html>
