@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -249,6 +251,13 @@ public class NoticeController {
         }
 
         return "/redirect";
+    }
+
+
+    // 8. 파일첨부하기
+    @PostMapping(value = "/notice/upload")
+    public String uploadFile(@RequestParam("file") MultipartFile file){
+        return "redirect:/success";
     }
 
 

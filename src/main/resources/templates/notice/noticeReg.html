@@ -475,7 +475,7 @@
 <div class="untree_co-section">
     <div class="container my-5">
         <div class="mb-5">
-            <form action="/notice/noticeInsert" method="post" onsubmit="doSubmit()" name="f" id="f">
+            <form action="/notice/noticeInsert" method="post" enctype="multipart/form-data" onsubmit="doSubmit()" name="f" id="f">
                 <fieldset>
                     <legend>게시글 등록</legend>
 
@@ -499,7 +499,7 @@
                     </div>
                     <div class="form-group">
                         <label for="formFile" class="form-label mt-4">첨부파일</label>
-                        <input class="form-control" type="file" id="formFile">
+                        <input class="form-control" type="file" id="formFile" name="attachment">
                     </div>
 
                     <br><br>
