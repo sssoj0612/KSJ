@@ -21,9 +21,9 @@
     <insert id="insertNoticeInfo" parameterType="NoticeDTO">
         INSERT INTO NOTICE
         (NOTICE_SEQ, TITLE, NOTICE_YN, CONTENTS, USER_ID, READ_CNT,
-         REG_ID, REG_DT, CHG_ID, CHG_DT)
+         REG_ID, REG_DT, CHG_ID, CHG_DT, ATTACHMENT_NAME, ATTACHMENT_PATH)
         VALUES ((SELECT NVL(MAX(A.NOTICE_SEQ), 0) + 1 FROM NOTICE A),
-                #{title}, #{notice_yn}, #{contents}, #{user_id}, 0, #{user_id}, SYSDATE(), #{user_id}, SYSDATE())
+                #{title}, #{notice_yn}, #{contents}, #{user_id}, 0, #{user_id}, SYSDATE(), #{user_id}, SYSDATE(), #{attachment_name}, #{attachment_path})
     </insert>
 
 
@@ -36,6 +36,8 @@
                USER_ID,
                CONTENTS,
                TO_CHAR(REG_DT, 'YYYY-MM-DD') AS REG_DT
+                ATTACHMENT_NAME,
+                ATTACHMENT_PATH
         FROM NOTICE
         WHERE NOTICE_SEQ = #{notice_seq}
     </select>

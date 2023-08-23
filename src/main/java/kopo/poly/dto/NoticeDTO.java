@@ -18,4 +18,7 @@ public class NoticeDTO {
     private String reg_dt;      // 등록일
     private String chg_id;      // 수정자
     private String chg_dt;      // 수정일
+    private String attachment_name;  // 파일명
+    private String attachment_path;  // 파일경로
+
 }

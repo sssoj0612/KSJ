@@ -35,8 +35,8 @@ div.minimalistBlack {
 }
 /* DivTable.com */
 .divTable{ display: table; }
-.divTableRow { display: table-row; background-color:#D9E3F1; }
-.divTableHeading { display: table-header-group;}
+.divTableRow { display: table-row; }
+.divTableHeading { display: table-header-group; }
 .divTableCell, .divTableHead { display: table-cell;}
 .divTableHeading { display: table-header-group;}
 .divTableFoot { display: table-footer-group;}

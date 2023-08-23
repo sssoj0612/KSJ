@@ -479,7 +479,7 @@
                     <div class="divTable minimalistBlack">
                         <div class="divTableBody">
                             <div class="divTableRow">
-                                <div class="divTableCell" style="text-align: center; width: 15%">제목
+                                <div class="divTableCell" style="text-align: center; width: 15% ; background-color:#D9E3F1;">제목
                                 </div>
                                 <!-- 공지글 여부가 '예'라면 제목 앞부분에 '[공지]' 추가 -->
                                 <div class="divTableCell" style="text-align: left" th:if="${rDTO.notice_yn=='Y'}"><strong>[공지]</strong>
@@ -490,25 +490,28 @@
                                 </div>
                             </div>
                             <div class="divTableRow">
-                                <div class="divTableCell" style="text-align: center">작성자
+                                <div class="divTableCell" style="text-align: center ; background-color:#D9E3F1;">작성자
                                 </div>
                                 <div class="divTableCell" style="text-align: left">[[${rDTO.user_id}]]
                                 </div>
                             </div>
                             <div class="divTableRow">
-                                <div class="divTableCell" style="text-align: center">작성일
+                                <div class="divTableCell" style="text-align: center ; background-color:#D9E3F1;">작성일
                                 </div>
                                 <div class="divTableCell" style="text-align: left">[[${rDTO.reg_dt}]]
                                 </div>
                             </div>
                             <div class="divTableRow">
-                                <div class="divTableCell" style="text-align: center">조회수
+                                <div class="divTableCell" style="text-align: center  ; background-color:#D9E3F1;">조회수
                                 </div>
-                                <div class="divTableCell" style="text-align: left">[[${rDTO.read_cnt}]]
+                                <!-- 서버에서 가져온 파일 경로를 이용하여 링크 생성 -->
+                                <div class="divTableCell" style="text-align: left">
+                                    <a th:href="${rDTO.attachmentPath}" th:text="${rDTO.attachmentName}" target=""></a>
+                                    [[${rDTO.read_cnt}]]
                                 </div>
                             </div>
                             <div class="divTableRow">
-                                <div class="divTableCell" style="text-align: center; vertical-align: middle">내용
+                                <div class="divTableCell" style="text-align: center; vertical-align: middle  ; background-color:#D9E3F1;">내용
                                 </div>
                                 <div class="divTableCell" style="text-align: left; height: 400px">[[${rDTO.contents}]]
                                 </div>

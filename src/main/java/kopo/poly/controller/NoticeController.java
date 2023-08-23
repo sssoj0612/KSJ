@@ -257,6 +257,7 @@ public class NoticeController {
     // 8. 파일첨부하기
     @PostMapping(value = "/notice/upload")
     public String uploadFile(@RequestParam("file") MultipartFile file){
+
         return "redirect:/success";
     }
 
